@@ -95,10 +95,10 @@ def pastedata(input, output, title, description, language, verbose):
 
     f = urllib.urlopen(
         "http://showmecode.com/code/add/",
-        "content=" + content
-        + "&title=" + title
+        "content=" + urllib.quote(content)
+        + "&title=" + urllib.quote(title)
         + "&lexer=" + language
-        + "&description=" + description
+        + "&description=" + urllib.quote(description)
         )
     print f.geturl()
 
