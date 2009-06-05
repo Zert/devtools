@@ -1,0 +1,10 @@
+Paste code on http://showmecode.com/
+Take cmdline args and content from stdin and returns URL for pasted code
+
+Usage:
+ showmecode.py
+    [-l|--language language]    # Language for highlighting (default plain text)
+	[-t|--title title]          # Title of code
+	[-d|--description]          # Description of code
+	[--langlist]                # List of supported languages
+	< content                   # Content to stdin
