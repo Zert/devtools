@@ -45,11 +45,12 @@ def main():
 
 def usage():
     print("Usage: " + sys.argv[0]
+          + " [-i|--input inputfile]"
           + " [-l|--language language]"
           + " [-t|--title title]"
           + " [-d|--description]"
           + " [--langlist]"
-          + " < content")
+          + " [< content]")
 
 all_languages = [
     "actionscript", "actionscript3", "apacheconf", "applescript", "assembly",
@@ -79,12 +80,9 @@ def pastedata(input, output, title, description, language, verbose):
         sys.exit(2)
 
     if input == None:
-        content = ""
-        for line in sys.stdin:
-            content += line
+        content = sys.stdin.read()
     else:
-        print "Input from file not realised"
-        sys.exit(2)
+        content = open(input, 'r').read()
 
     if content == "":
         print "Null content. Exiting..."
@@ -100,7 +98,7 @@ def pastedata(input, output, title, description, language, verbose):
         + "&lexer=" + language
         + "&description=" + urllib.quote(description)
         )
-    print f.geturl()
+    print(f.geturl())
 
 if __name__ == "__main__":
     main()
