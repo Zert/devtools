@@ -91,13 +91,12 @@ def pastedata(input, output, title, description, language, verbose):
     if verbose:
         print "Content:\n" + content
 
-    f = urllib.urlopen(
-        "http://showmecode.com/code/add/",
-        "content=" + urllib.quote(content)
-        + "&title=" + urllib.quote(title)
-        + "&lexer=" + language
-        + "&description=" + urllib.quote(description)
-        )
+
+    params = urllib.urlencode({'content':content,
+                               'title':title,
+                               'lexer':language,
+                               'description':description})
+    f = urllib.urlopen("http://showmecode.com/code/add/", params)
     print(f.geturl())
 
 if __name__ == "__main__":
