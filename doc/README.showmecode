@@ -3,8 +3,12 @@ Take cmdline args and content from stdin and returns URL for pasted code
 
 Usage:
  showmecode.py
+    --langlist                  # List of supported languages
+
+ showmecode.py
+    [-i|--input inputfile]      # Read content from inputfile
     [-l|--language language]    # Language for highlighting (default plain text)
-	[-t|--title title]          # Title of code
-	[-d|--description]          # Description of code
-	[--langlist]                # List of supported languages
-	< content                   # Content to stdin
+    [-t|--title title]          # Title of code
+    [-d|--description]          # Description of code
+    [-v|--verbose]              # Verbose mode
+    < content                   # Get content from stdin
