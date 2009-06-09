@@ -1,46 +1,40 @@
 #!/usr/bin/python
 
-import getopt, sys
+from optparse import OptionParser
+import sys
 import urllib
 
 
 def main():
-    try:
-        opts, args = getopt.getopt(sys.argv[1:], "hi:o:l:t:d:v",
-                                   ["help", "input=", "output=",
-                                    "language=", "title=",
-                                    "description=", "langlist"])
-    except getopt.GetoptError, err:
-        print str(err)
-        usage()
-        sys.exit(2)
-    input = None
-    output = None
-    verbose = False
-    title = ""
-    description = ""
-    language = "text"
-    for o, a in opts:
-        if o == "-v":
-            verbose = True
-        elif o in ("-h", "--help"):
-            usage()
-            sys.exit()
-        elif o in ("-i", "--input"):
-            input = a
-        elif o in ("-o", "--output"):
-            output = a
-        elif o in ("-l", "--language"):
-            language = a
-        elif o in ("-t", "--title"):
-            title = a
-        elif o in ("-d", "--description"):
-            description = a
-        elif o == "--langlist":
+    parser = OptionParser()
+    parser.add_option("-i", "--input", dest="input",
+                      help="Read content from INPUTFILE", metavar="INPUTFILE")
+##    parser.add_option("-o", "--output", dest="output",
+##                      help="Write HTML-reply to OUTFILE", metavar="OUTFILE")
+    parser.add_option("-l", "--language", dest="language", default="text",
+                      help="Language for highlighting (default plain text)")
+    parser.add_option("--langlist", action="store_true", dest="langlist",
+                      default=False, help="List supported languages")
+    parser.add_option("-t", "--title", dest="title", default="",
+                      help="Title of code")
+    parser.add_option("-d", "--description", dest="description", default="",
+                      help="Description of code")
+    parser.add_option("-v", "--verbose", action="store_true", dest="verbose",
+                      default=False, help="List supported languages")
+
+    (options, args) = parser.parse_args()
+
+    input = options.input
+    ##output = options.output
+    output = None,
+    verbose = options.verbose
+    title = options.title
+    description = options.description
+    language = options.language
+    if options.langlist:
             language_list()
             sys.exit(2)
-        else:
-            assert False, "unhandled option"
+
     pastedata(input, output, title, description, language, verbose)
 
 def usage():
