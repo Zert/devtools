@@ -64,7 +64,7 @@ all_languages = [
 all_languages.sort()
 
 def language_list():
-    print "Supported languages: " + ", ".join(all_languages)
+    print "Supported languages: " + str.join(", ", all_languages)
 
 
 def pastedata(input, output, title, description, language, verbose):
